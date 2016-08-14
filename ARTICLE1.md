@@ -1,11 +1,11 @@
 # Kotlin + Data binding での List adapter
 
-Kotlin + Data binding を用いた場合の List adapter 実装. 個人的ベストプラクティス.
+Kotlin + Data binding を用いた場合の List adapter 実装. 個人的ベストプラクティス.  
 これさえ作っておけば標準的な List に対応できる.
 
 ## adapter
 
-```
+```kotlin
 class BindingListAdapter<T>(private val context: Context, private val layout: Int, private var items: List<T> = emptyList<T>()) : BaseAdapter() {
 
     override fun getItem(position: Int): T {
@@ -39,13 +39,12 @@ class BindingListAdapter<T>(private val context: Context, private val layout: In
 }
 ```
 
-constructor には context, layout resource id, item を渡す.
-T は List item ViewModel. getView で ViewDataBinding と紐づける.
-ViewModel は下記.
+constructor には context, layout resource id, item を渡す.  
+T は List item ViewModel. getView で ViewDataBinding と紐づける.  
 
 ## ViewModel
 
-```
+```kotlin
 class DemoViewModel(context: Context) {
     val adapter = BindingListAdapter<DemoListItemViewModel>(context, R.layout.list_item_demo)
 }
@@ -53,7 +52,7 @@ class DemoViewModel(context: Context) {
 
 ### List item ViewModel
 
-```
+```kotlin
 class DemoListItemViewModel {
 
     val title = "title"
@@ -63,10 +62,10 @@ class DemoListItemViewModel {
 }
 ```
 
-view model は特に工夫せず素直に作るだけ.
+view model は特に工夫せず素直に作るだけ.  
 値が可変で通知が必要であれば, もちろん以下のようにする必要がある.
 
-```
+```kotlin
 class DemoListItemViewModel : BaseObservable() {
 
     @Bindable
@@ -85,10 +84,10 @@ class DemoListItemViewModel : BaseObservable() {
 
 ## Layout xml
 
-List view に adapter を紐付ける.
+List view に adapter を紐付ける.  
 List item layout xml では, 内部の要素をそれぞれ紐づけることで対応する.
 
-```
+```xml
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -109,7 +108,7 @@ List item layout xml では, 内部の要素をそれぞれ紐づけることで
 
 ### List item
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
