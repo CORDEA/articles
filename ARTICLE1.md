@@ -1,3 +1,6 @@
+% Kotlin + Data binding での List adapter
+% 2016-8-14
+
 # Kotlin + Data binding での List adapter
 
 Kotlin + Data binding を用いた場合の List adapter 実装. 個人的ベストプラクティス.  
@@ -6,7 +9,7 @@ Kotlin + Data binding を用いた場合の List adapter 実装. 個人的ベス
 ## adapter
 
 ```kotlin
-class BindingListAdapter<T>(private val context: Context, private val layout: Int, private var items: List<T> = emptyList<T>()) : BaseAdapter() {
+class BindingListAdapter<T>(private val context: Context, private val layout: Int, private val items: List<T> = emptyList<T>()) : BaseAdapter() {
 
     override fun getItem(position: Int): T {
         return items[position]
